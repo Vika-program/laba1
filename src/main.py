@@ -1,5 +1,4 @@
 import sys
-from src.trans import trans_to_rpn
 from src.calc import calc
 
 def run():
