@@ -1,5 +1,6 @@
 from src.other import is_op, is_num, CalcError
-from src.tokenize_2 import tokenize_2
+from src.tokenize import tokenize
+from src.is_correct import is_correct
 
 PRIO = {'+': 1, '-': 1, '*': 2, '/': 2, '&': 2, '%': 2, '#': 3, 'u+': 4, 'u-': 4} #словарь с приоритетами операций
 
@@ -15,7 +16,8 @@ def trans_to_rpn(expr):
     if not expr:
         raise CalcError('Пустой ввод')
     expr = expr.replace('//', '&').replace('**', '#') #заменяем // на &, ** на #
-    expr = tokenize_2(expr)
+    expr = tokenize(expr)
+    is_correct(expr)
     for tok in expr:
         if is_num(tok):
             res.append(tok)

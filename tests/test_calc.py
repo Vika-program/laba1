@@ -17,6 +17,9 @@ def test_calc():
     assert calc("(100 + 56) * 2 % 34") == 6
     assert calc('-(1 + 2) * 3') == -9
     assert calc('2**3**2') == 512
+    assert calc('2 + 3 * 4 ** 2 - 10 / 2') == 45
+    assert calc('2 ** 3 ** 2 / 4 * 3 + 1') == 385
+    assert calc('((2 + 3 * (4 - 1)) ** 2 - 10) // 3 + 5 % 3') == 39
 
     with pytest.raises(CalcError):
         calc("23.5 // 4.5")
@@ -54,3 +57,7 @@ def test_calc():
         calc('(1 + 2) (2 + 3)')
     with pytest.raises(CalcError):
         calc('*2')
+    with pytest.raises(CalcError):
+        calc('56 + .56')
+    with pytest.raises(CalcError):
+        calc('56 46')

@@ -20,7 +20,7 @@ def calc(expr):
                     res = -op
                 elif tok == 'u+':
                     res = op
-            else:
+            elif len(stack) >= 2:
                 op1 = stack.pop()
                 op2 = stack.pop()
                 if (tok == '&' or tok == '%' or tok == '/') and op1 == 0.0:
@@ -45,8 +45,12 @@ def calc(expr):
                             res = op2 / op1
                         else:
                             res = op2 % op1
+            else:
+                raise CalcError('Ошибка')
             stack.append(res)
     res = stack.pop()
+    if stack:
+        raise CalcError('Ошибка синтаксика')
     if res % 1 == 0:
         res = int(res)
     print(res)
